@@ -3,7 +3,6 @@ import { EventosCulturalesService } from './eventos-culturales.service';
 import { CreateEventosCulturalDto } from './dto/create-eventos-cultural.dto';
 import { UpdateEventosCulturalDto } from './dto/update-eventos-cultural.dto';
 
-
 @Controller('eventos-culturales')
 export class EventosCulturalesController {
   constructor(private readonly eventosCulturalesService: EventosCulturalesService) {}

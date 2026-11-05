@@ -68,6 +68,7 @@ defineExpose({ obtenerLista })
           <th>Precio</th>
           <th>Fecha Evento</th>
           <th>Estado</th>
+          <th>Categoria de Evento</th>
         </tr>
       </thead>
       <tbody>
@@ -77,8 +78,10 @@ defineExpose({ obtenerLista })
           <td>{{ eventoCultural.titulo }}</td>
           <td>{{ eventoCultural.artistaPrincipal }}</td>
           <td>{{ eventoCultural.duracionMinutos }}</td>
+          <td>{{ eventoCultural.precioEntrada }}</td>
           <td>{{ eventoCultural.fechaEvento }}</td>
           <td>{{ eventoCultural.estado }}</td>
+          <td>{{ eventoCultural.categoriaEvento }}</td>
           <td>
             <Button
               icon="pi pi-pencil"

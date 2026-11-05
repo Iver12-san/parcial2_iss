@@ -39,6 +39,13 @@ export class EventosCultural {
     default: 'Programado',
   })
   estado: string;
+  @Column({
+    type: 'enum',
+    enum: ['Concierto', 'Teatro', 'Danza', 'Festival'],
+    default: 'Concierto',
+    name: 'categoria_evento'
+  })
+  categoriaEvento: string;
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;

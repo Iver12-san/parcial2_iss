@@ -1,6 +1,15 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Transform } from "class-transformer";
-import { IsDateString, IsDefined, IsEnum, IsInt, IsNotEmpty, IsNumber, IsString, MaxLength } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
+import {
+  IsDateString,
+  IsDefined,
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 
 export class CreateEventosCulturalDto {
   @ApiProperty()
@@ -53,10 +62,23 @@ export class CreateEventosCulturalDto {
   })
   @IsNotEmpty({ message: 'El campo estado no debe estar vacío' })
   @IsEnum(['Programado', 'Agotado', 'Cancelado'], {
-    message:
-      'El campo estado solo puede tener los valores: Programado, Agotado, Cancelado',
+    message: 'El campo estado solo puede tener los valores: Programado, Agotado, Cancelado',
   })
   @MaxLength(20, { message: 'El campo estado no puede tener más de 20 caracteres' })
   @Transform(({ value }): string | undefined => (typeof value === 'string' ? value.trim() : value))
   readonly estado: string;
+
+  @ApiProperty({
+    description:
+      'Categoría del evento cultural. Valores permitidos: Concierto, Teatro, Danza, Festival',
+    enum: ['Concierto', 'Teatro', 'Danza', 'Festival'],
+    example: 'Concierto',
+  })
+  @IsNotEmpty({ message: 'El campo categoría no debe estar vacío' })
+  @IsEnum(['Concierto', 'Teatro', 'Danza', 'Festival'], {
+    message: 'El campo categoría solo puede tener los valores: Concierto, Teatro, Danza, Festival',
+  })
+  @MaxLength(50, { message: 'El campo categoría no puede tener más de 50 caracteres' })
+  @Transform(({ value }): string | undefined => (typeof value === 'string' ? value.trim() : value))
+  readonly categoriaEvento: string;
 }

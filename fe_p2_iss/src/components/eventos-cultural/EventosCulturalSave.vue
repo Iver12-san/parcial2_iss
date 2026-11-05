@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { EventoCultural, EstadoEvento } from '@/models/eventos-culturales'
+import type { EventoCultural, EstadoEvento, CategoriaEventoo } from '@/models/eventos-culturales'
 import type { Recinto } from '@/models/recinto'
 import http from '@/plugins/axios'
 import { Button, Dialog, InputNumber, InputText, Select, Textarea, DatePicker } from 'primevue'
@@ -9,6 +9,8 @@ const ENDPOINT = 'eventos-Culturales'
 
 // Estado del Evento (para el Select)
 const ESTADOS_EVENTO: EstadoEvento[] = ['Programado', 'Agotado', 'Cancelado']
+// Categoría del Evento (para el Select)
+const CATEGORIAS_EVENTO: CategoriaEventoo[] = ['Concierto', 'Teatro', 'Danza', 'Festival']
 
 const props = defineProps({
   mostrar: Boolean,
@@ -53,6 +55,7 @@ watch(
         precioEntrada: 0,
         fechaEvento: new Date(),
         estado: 'Programado',
+        categoriaEvento: 'Concierto',
         recinto: {} as Recinto,
       } as EventoCultural
     }
@@ -82,6 +85,7 @@ async function handleSave() {
         ? eventoCultural.value.fechaEvento.toISOString()
         : null,
       estado: eventoCultural.value.estado,
+      categoriaEvento: eventoCultural.value.categoriaEvento,
     }
 
     if (props.modoEdicion) {
@@ -116,6 +120,7 @@ watch(
           precioEntrada: 0,
           fechaEvento: new Date(),
           estado: 'Programado',
+          categoriaEvento: 'Concierto',
           recinto: {} as Recinto,
         } as EventoCultural
       }
@@ -219,6 +224,18 @@ watch(
             :options="ESTADOS_EVENTO"
             class="w-full"
             placeholder="Seleccione el estado"
+            required
+          />
+        </div>
+
+        <div class="field mb-4">
+          <label for="categoriaEvento" class="font-semibold w-full">Categoría del Evento</label>
+          <Select
+            id="categoriaEvento"
+            v-model="eventoCultural.categoriaEvento"
+            :options="CATEGORIAS_EVENTO"
+            class="w-full"
+            placeholder="Seleccione la categoría"
             required
           />
         </div>
